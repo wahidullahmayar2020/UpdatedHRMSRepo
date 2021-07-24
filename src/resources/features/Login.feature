@@ -1,13 +1,13 @@
 Feature:Login
 
-  @simpletag
+  @Smoke
   Scenario: valid admin login
 #    Given user navigates to hrms
     When user enters valid admin username and password
     And user clicks on login button
     Then admin user is successfully logged in
 
-    @regression
+    @Smoke
 
   Scenario: valid ess employee login
 #    Given user navigates to hrms

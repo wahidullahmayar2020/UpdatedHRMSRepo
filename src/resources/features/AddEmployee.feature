@@ -54,3 +54,10 @@ Scenario: :Adding employee from employee page
         @excel
         Scenario:Adding the employee from excel file
           When user adds multiple employees from excel file "newdata" sheet and verify they are added
+@db
+          Scenario: Add the employee and testing it from the backend
+         When user enters firstname "Yulia123" and middlename "MS" and lastname "Yulia456"
+         And capture the employeeId
+  And user clicks on save button option
+  Then query the HRMS database
+  Then verify the data from frontend and backend

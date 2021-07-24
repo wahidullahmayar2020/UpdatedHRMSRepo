@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,8 +25,18 @@ public class CommonMethods {
             case "chrome":
                 //System.setProperty("webdriver.chrome.driver", "src/drivers/chromedriver.exe");
                 WebDriverManager.chromedriver().setup();
+            if(ConfigReader.getPropertyValue("headless").equals("true")){
+
+                ChromeOptions chromeOptions=new ChromeOptions();
+                chromeOptions.setHeadless(true);
+                driver = new ChromeDriver(chromeOptions);
+            }else {
                 driver = new ChromeDriver();
+
+            }
+
                 break;
+
             case "firefox":
                 //  System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver.exe");
                 WebDriverManager.firefoxdriver().setup();
@@ -69,8 +80,9 @@ public class CommonMethods {
     }
 
 
-    public static void takeScreenshot(String fileName) {
+    public static byte[] takeScreenshot(String fileName) {
         TakesScreenshot ts = (TakesScreenshot) driver;
+        byte[] picBytes=ts.getScreenshotAs(OutputType.BYTES);
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
         try {
@@ -78,6 +90,7 @@ public class CommonMethods {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return picBytes;
     }
 
     public static String getTimeStamp(String pattern){
