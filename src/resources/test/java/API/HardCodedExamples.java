@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.*;
 import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class HardCodedExamples {
+public class  HardCodedExamples {
 
 
     /*
